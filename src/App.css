@@ -30,3 +30,56 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+.board {
+  position: relative;
+  width: 600px;
+  height: 600px;
+  margin: auto;
+  background: linear-gradient(135deg, rgba(135,224,253,1) 0%,rgba(83,203,241,1) 40%,rgba(5,171,224,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */}
+
+.tile {
+  position: absolute;
+  background-color: #282c342b;
+}
+
+.tile.sameColor::after {
+  content: "o";
+}
+
+
+.vertex {
+  position: absolute;
+  background-color: #ffffff33;
+  font-size: 8pt;
+  color: white;
+}
+
+.vertex.entry {
+  background-color: #ffffffff;
+  border-radius: 50%;
+}
+
+.vertex.exit {
+  background-color: #000000ff;
+  border-radius: 50%;
+}
+
+.vertex.visited {
+  background-color: #ff0000ff;
+}
+
+.edge {
+  position: absolute;
+  background-color: #ffffff33;
+  font-size: 8pt;
+}
+
+.edge.visited {
+  background-color: #ff0000ff;
+}
+
+
+
