@@ -7,7 +7,7 @@ class EdgeView extends Component {
     if (edge.x1 == edge.x2) {
       // vertical
       return (
-        <div className={"edge" + (edgeState.visited ? " visited" : "")} style={{
+        <div className={"edge vertical" + (edgeState.visited ? " visited" : "") + (edge.broken ? " broken" : "")} style={{
           width: edgeSize,
           height: tileSize,
           left: (edge.x1 * (tileSize + edgeSize) - edgeSize),
@@ -18,7 +18,7 @@ class EdgeView extends Component {
     }
     else {
       return (
-        <div className={"edge" + (edgeState.visited ? " visited" : "")} style={{
+        <div className={"edge horizontal" + (edgeState.visited ? " visited" : "") + (edge.broken ? " broken" : "")} style={{
           width: tileSize,
           height: edgeSize,
           left: (edge.x1 * (tileSize + edgeSize)),

@@ -1,14 +1,15 @@
 import { connect } from 'react-redux'
-import { newGame } from './store'
+import { newGame, resetLevel } from './store'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 class GameMenu extends Component {
   render() {
-    let {newGame} = this.props;
+    let {newGame, resetLevel} = this.props;
     return (
       <div className="menu">
         <button onClick={() => newGame()}>New Game</button>
+        <button onClick={() => resetLevel()}>Retry</button>
       </div>
     );
   }
@@ -30,6 +31,7 @@ export default connect(
     level: state.level
   }),
   dispatch => ({
+    resetLevel: id => dispatch(resetLevel(id)),
     newGame: id => dispatch(newGame(id))
   })
 )(GameMenu);

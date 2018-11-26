@@ -1,3 +1,8 @@
+body {
+  background-color: black;
+}
+
+
 .App {
   text-align: center;
 }
@@ -31,35 +36,129 @@
   }
 }
 
+.boardcontainer {
+  position: relative;
+  height: 650px;
+  padding-top: 1px;
+  perspective: 1000px;
+}
+
+
+.boardcontainer > div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  backface-visibility: hidden;
+}
+
+.boardcontainer > .prevLevel {
+  animation: Level-fade-out 1s linear;
+  opacity: 0;
+}
+
+@keyframes Level-fade-out {
+  from {
+    transform: rotateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: rotateX(-180deg);
+    opacity: 0;
+  }
+}
+
+.boardcontainer > .nextLevel {
+  animation: Level-fade-in 1s linear;
+}
+
+@keyframes Level-fade-in {
+  from {
+    opacity: 0;
+    transform: rotateX(180deg);
+  }
+  to {
+    opacity: 1;
+    transform: rotateX(0);
+  }
+}
+
 
 
 .board {
   position: relative;
   width: 600px;
   height: 600px;
-  margin: auto;
-  background: linear-gradient(135deg, rgba(135,224,253,1) 0%,rgba(83,203,241,1) 40%,rgba(5,171,224,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */}
+  margin: 20px auto;
+  color: white;
+}
+
+.board::before {
+  content: "";
+  position: absolute;
+  left: 30px;
+  top: 30px;
+  width: 510px;
+  height: 510px;
+  background-color: #6179bd;
+  border: 10px outset #8c98bb;
+  opacity: 0.5;
+}
+
+.board::after {
+content: "";
+    position: absolute;
+    left: 30px;
+    top: 30px;
+    width: 510px;
+    height: 510px;
+    background-color: #6179bd;
+    border: 10px outset #8c98bb;
+    opacity: 0.5;
+    background: linear-gradient(135deg, rgba(212,228,239, 1) 0%,rgba(134,174,204,1) 100%);
+  }
 
 .tile {
   position: absolute;
-  background-color: #282c342b;
+  background-color: #0000000d;
 }
 
 .tile.sameColor::after {
   content: "o";
+  position: absolute;
+}
+
+.board.completed .tile.invalid::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  background-color: red;
+  animation: invalid-tile-pulse infinite alternate 500ms linear;
+  box-shadow: 0 0 10px red, 0 0 10px red, 0 0 10px red, 0 0 10px red;
+}
+
+@keyframes invalid-tile-pulse {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 
 .vertex {
   position: absolute;
-  background-color: #ffffff33;
+  background-color: #000000;
   font-size: 8pt;
   color: white;
 }
 
 .vertex.entry {
-  background-color: #ffffffff;
-  border-radius: 50%;
+  background-color: #000000;
 }
 
 .vertex.exit {
@@ -68,18 +167,23 @@
 }
 
 .vertex.visited {
-  background-color: #ff0000ff;
+  background-color: blue;
+  box-shadow: 0 0 10px lightblue, 0 0 10px lightblue, 0 0 10px lightblue, 0 0 10px lightblue;
 }
 
 .edge {
   position: absolute;
-  background-color: #ffffff33;
+  background-color: #000000;
   font-size: 8pt;
 }
 
 .edge.visited {
-  background-color: #ff0000ff;
+  background-color: blue;
+  box-shadow: 0 0 10px lightblue, 0 0 10px lightblue, 0 0 10px lightblue, 0 0 10px lightblue;
 }
 
+.edge.broken {
+  display: none;
+}
 
 

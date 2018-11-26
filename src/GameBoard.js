@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { newGame, visitVertex } from './store'
+import { newGame, resetLevel, visitVertex } from './store'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import TileView from './TileView';
@@ -10,6 +10,7 @@ class GameBoard extends Component {
   constructor() {
     super();
     this.onClick = this.onClick.bind(this);
+    this.state = {}
   }
   onClick(e) {
     let {level, visitVertex} = this.props;
@@ -30,6 +31,8 @@ class GameBoard extends Component {
     }
 
   }
+
+
   render() {
     let {level} = this.props;
     if (!level || !level.tiles || ! level.tiles[0]) {
@@ -39,24 +42,25 @@ class GameBoard extends Component {
         </div>
         )
     }
-    else if (level.completed && !level.won) {
-      return (
-        <div className="board">
-          Failed
-        </div>
-      )
-    }
-    else if (level.completed && level.won) {
-      return (
-        <div className="board">
-          You win
-        </div>
-        )
-    }
     else {
+      let overlay = null;
+      if (level.completed && !level.won) {
+        overlay = (
+          <div className="boardOverlay">
+            Failed
+          </div>
+        )
+      }
+      else if (level.completed && level.won) {
+        overlay = (
+          <div className="boardOverlay">
+            You win
+          </div>
+          )
+      }
       return (
-        <div className="board" ref={e => (this.div = e)} onClick={this.onClick}>
-          {level.name}
+        <div className={"board " + (level.completed ? " completed" : "")  + (level.won ? " won" : "") } ref={e => (this.div = e)} onClick={this.onClick}>
+
           {level.tiles.map((t, i)=>(<TileView
             tile={t}
             tileState={level.tileState[i]}
@@ -74,6 +78,7 @@ class GameBoard extends Component {
             vertexState={level.vertexState[i]}
             tileSize={50}
             edgeSize={10} />))}
+          {overlay}
         </div>
       );
     }
@@ -93,9 +98,10 @@ GameBoard.propTypes = {
 
 export default connect(
   state => ({
-    level: state.level,
+   // level: state.level,
   }),
   dispatch => ({
+    resetLevel: id => dispatch(resetLevel(id)),
     newGame: id => dispatch(newGame(id)),
     visitVertex: id => dispatch(visitVertex(id))
   })

@@ -12,7 +12,6 @@ class TileView extends Component {
         top: (tile.y1 * (tileSize + edgeSize)),
         color: tile.color || "black"
       }}>
-
       </div>
     );
   }
