@@ -15,14 +15,31 @@ class GameBoard extends Component {
         this.state = {};
         this.dragging = false;
     }
+    componentDidMount() {
+        this.div.addEventListener("touchstart", this.onMouseDown);
+        this.div.addEventListener("touchmove", this.onMouseMove, {passive: false});
+        this.div.addEventListener("touchend", this.onMouseUp);
+    }
     onMouseDown(e) {
         this.dragging = true;
     }
     onMouseMove(e) {
         if (!this.dragging) return;
         let {level, visitVertex} = this.props;
-        let x = (e.nativeEvent.clientX - this.div.offsetLeft);
-        let y = (e.nativeEvent.clientY - this.div.offsetTop);
+        let position, target;
+        if (e.targetTouches) {
+            position = e.targetTouches[0];
+            target = e.target;
+            e.preventDefault();
+        }
+        else {
+            position = e.nativeEvent;
+            target = e.nativeEvent.target;
+        }
+        if (!position || !target) return;
+
+        let x = (position.clientX - target.offsetLeft);
+        let y = (position.clientY - target.offsetTop);
 
         // find nearest vertex
 
@@ -39,8 +56,20 @@ class GameBoard extends Component {
         if (!this.dragging) return;
         this.dragging = false;
         let {level, visitVertex} = this.props;
-        let x = (e.nativeEvent.clientX - this.div.offsetLeft);
-        let y = (e.nativeEvent.clientY - this.div.offsetTop);
+
+        let position, target;
+        if (e.targetTouches) {
+            position = e.targetTouches[0];
+            target = e.target;
+        }
+        else {
+            position = e.nativeEvent;
+            target = e.nativeEvent.target;
+        }
+        if (!position || !target) return;
+
+        let x = (position.clientX - target.offsetLeft);
+        let y = (position.clientY - target.offsetTop);
 
         // find nearest vertex
 
