@@ -5,6 +5,64 @@ const tileTypes = {
     blank: {
         validate: () => true
     },
+    paired: {
+        place: (regions, tiles) => {
+            console.log("placing paired tiles");
+            // at least two colors, up to the number of regions
+            let availableColors = ["black", "white", "orange", "blue", "green", "purple", "yellow"]
+                .map((a) => [Math.random(), a])
+                .sort((a, b) => a[0] - b[0])
+                .map((a) => a[1]);
+            let colorCount = Math.min(availableColors.length, Math.floor(Math.random() * (regions.length - 2) + 2));
+
+            for (let i = 0; i < colorCount; i++) {
+                let color = availableColors[i];
+                let availableRegions = [...regions.keys()].filter(regionId => {
+                    let region = regions[regionId];
+                    // reject regions which already contain a pair
+                    if (region.some(id => {
+                        return tiles[id].tileType === "paired" && tiles[id].color === color;
+                    })) return false;
+                    // need at least two free tiles
+                    if (region.filter(id => {
+                        return tiles[id].tileType === "blank";
+                    }).length < 2) return false;
+                    return true;
+                });
+
+                let regionCount = Math.min(availableRegions.length, Math.floor(Math.random() * (regions.length - 2) + 2));
+
+                for (let j = 0; j < regionCount; j++) {
+                    if (availableRegions.length === 0) continue;
+
+                    let ri = Math.floor(Math.random() * availableRegions.length);
+                    let regionId = availableRegions[ri];
+                    availableRegions.splice(ri, 1);
+                    let region = regions[regionId];
+                    for (let k = 0; k < 2; k++) {
+                        let availableTiles = region.filter(id => {
+                            return tiles[id].tileType === "blank";
+                        });
+                        let tile = tiles[availableTiles[Math.floor(Math.random() * availableTiles.length)]];
+                        tile.tileType = "paired";
+                        tile.color = color;
+                        tile.symbol = "diamond";
+                    }
+                }
+            }
+        },
+        validate: (tileId, region, tiles, tileState) => {
+            let tile = tiles[tileId];
+            let matchesInRegion = region.filter(id => {
+                let otherTile = tiles[id];
+                if (tile.tileType === otherTile.tileType && tile.color === otherTile.color) {
+                    return true;
+                }
+                return false;
+            });
+            return matchesInRegion.length === 2;
+        }
+    },
     sameColor: {
         place: (regions, tiles) => {
             console.log("placing sameColor tiles");
@@ -296,7 +354,7 @@ function generateLevel(rows, cols) {
 
     // add tiles
 
-    for (let tileType of ["sameColor"]) {
+    for (let tileType of ["paired", "sameColor"]) {
         tileTypes[tileType].place(solution.regions, level.tiles);
     }
 
