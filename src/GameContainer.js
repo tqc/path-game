@@ -7,7 +7,11 @@ import GameBoard from './GameBoard';
 class GameContainer extends Component {
     constructor() {
         super();
-        this.state = {};
+        this.state = {
+            tileSize: 50,
+            edgeSize: 10
+        };
+        this.updateSize = this.updateSize.bind(this);
     }
 
     static getDerivedStateFromProps(props, state) {
@@ -44,15 +48,35 @@ class GameContainer extends Component {
             prevLevel: null
         };
     }
-
+    updateSize() {
+        if (!this.div) return;
+        let r = this.div.getBoundingClientRect();
+        console.log(r);
+        let boardSize = Math.min(r.width, r.height) - 20;
+        let edgeSize = boardSize / 60
+        let tileSize = (boardSize / (this.props.level.cols+2))-edgeSize;
+        this.setState({
+            boardSize: boardSize,
+            vMargin: (r.height - boardSize) / 2,
+            hMargin: (r.width - boardSize) / 2,
+            tileSize: tileSize,
+            edgeSize: edgeSize
+        })
+    }
+    componentDidMount() {
+        this.updateSize();
+        window.addEventListener("resize", this.updateSize);
+    }
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.updateSize);
+    }
     render() {
-        let {level, prevLevel, nextLevel} = this.state;
-
+        let {level, prevLevel, nextLevel, tileSize, edgeSize, boardSize, vMargin, hMargin} = this.state;
         return (
             <div className="boardcontainer" ref={e => (this.div = e)} onClick={this.onClick}>
-                {(prevLevel ? (<div className="prevLevel"><GameBoard level={prevLevel} /></div>) : null)}
-                {(level ? (<div className="currentLevel"><GameBoard level={level} /></div>) : null)}
-                {(nextLevel ? (<div className="nextLevel"><GameBoard level={nextLevel} /></div>) : null)}
+                {(prevLevel ? (<div className="prevLevel"><GameBoard level={prevLevel} {...{tileSize, edgeSize, boardSize, vMargin, hMargin}} /></div>) : null)}
+                {(level ? (<div className="currentLevel"><GameBoard level={level} {...{tileSize, edgeSize, boardSize, vMargin, hMargin}} /></div>) : null)}
+                {(nextLevel ? (<div className="nextLevel"><GameBoard level={nextLevel} {...{tileSize, edgeSize, boardSize, vMargin, hMargin}} /></div>) : null)}
 
             </div>
         );

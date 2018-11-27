@@ -238,6 +238,7 @@ function generateLevel(rows, cols) {
             let vertex = {
                 x: j + 1,
                 y: i + 1,
+                vertexType: "standard"
             };
             level.vertices.push(vertex);
         }
@@ -311,7 +312,7 @@ function generateLevel(rows, cols) {
 
 
     // add an entry
-    let entries = [(rows + 1) * (cols + 1) - 5];
+    let entries = [Math.floor((rows + 1) * (cols + 1) - cols / 2 - 1)];
 
     for (let i = 0; i < entries.length; i++) {
         level.vertices[entries[i]].vertexType = "entry";
@@ -319,7 +320,7 @@ function generateLevel(rows, cols) {
 
 
     // add an exit
-    let exits = [4];
+    let exits = [Math.floor(cols / 2)];
 
     for (let i = 0; i < exits.length; i++) {
         level.vertices[exits[i]].vertexType = "exit";
@@ -386,7 +387,7 @@ function generateLevel(rows, cols) {
 
 export const initialState = {
     level: {
-        ...generateLevel(8, 8),
+        ...generateLevel(6, 6),
     }
 };
 
@@ -397,7 +398,7 @@ const level = (state = initialState.level, action) => {
     case 'NEW_GAME':
         return {
             ...state,
-            ...generateLevel(8, 8)
+            ...generateLevel(6, 6)
         };
     case 'RESET_LEVEL':
         return {

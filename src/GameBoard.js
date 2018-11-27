@@ -25,7 +25,7 @@ class GameBoard extends Component {
     }
     onMouseMove(e) {
         if (!this.dragging) return;
-        let {level, visitVertex} = this.props;
+        let {level, visitVertex, tileSize, edgeSize} = this.props;
         let position, target;
         if (e.targetTouches) {
             position = e.targetTouches[0];
@@ -43,8 +43,8 @@ class GameBoard extends Component {
 
         // find nearest vertex
 
-        let col = Math.round(x / 60) - 1;
-        let row = Math.round(y / 60) - 1;
+        let col = Math.round(x / (tileSize + edgeSize)) - 1;
+        let row = Math.round(y / (tileSize + edgeSize)) - 1;
         console.log(x + ", " + y + " => " + col + ", " + row);
 
         if (col >= 0 && row >= 0 && row <= level.rows && col <= level.cols) {
@@ -55,7 +55,7 @@ class GameBoard extends Component {
     onMouseUp(e) {
         if (!this.dragging) return;
         this.dragging = false;
-        let {level, visitVertex} = this.props;
+        let {level, visitVertex, tileSize, edgeSize} = this.props;
 
         let position, target;
         if (e.targetTouches) {
@@ -73,8 +73,8 @@ class GameBoard extends Component {
 
         // find nearest vertex
 
-        let col = Math.round(x / 60) - 1;
-        let row = Math.round(y / 60) - 1;
+        let col = Math.round(x / (tileSize + edgeSize)) - 1;
+        let row = Math.round(y / (tileSize + edgeSize)) - 1;
         console.log(x + ", " + y + " => " + col + ", " + row);
 
         if (col >= 0 && row >= 0 && row <= level.rows && col <= level.cols) {
@@ -83,7 +83,7 @@ class GameBoard extends Component {
         }
     }
     render() {
-        let {level} = this.props;
+        let {level, tileSize, edgeSize, boardSize, vMargin, hMargin} = this.props;
         if (!level || !level.tiles || !level.tiles[0]) {
             return (
                 <div className="board">
@@ -114,27 +114,35 @@ class GameBoard extends Component {
                     onMouseDown={this.onMouseDown}
                     onMouseMove={this.onMouseMove}
                     onMouseUp={this.onMouseUp}
+                    style={{
+                        marginTop: vMargin,
+                        marginBottom: vMargin,
+                        marginLeft: hMargin,
+                        marginRight: hMargin,
+                        width: boardSize,
+                        height: boardSize
+                    }}
                 >
                     {level.tiles.map((t, i) => (<TileView
                         key={i}
                         tile={t}
                         tileState={level.tileState[i]}
-                        tileSize={50}
-                        edgeSize={10} />))}
+                        tileSize={tileSize}
+                        edgeSize={edgeSize} />))}
                     {level.edges.map((e, i) => (<EdgeView
                         key={i}
                         edge={e}
                         edgeId={i}
                         edgeState={level.edgeState[i]}
-                        tileSize={50}
-                        edgeSize={10} />))}
+                        tileSize={tileSize}
+                        edgeSize={edgeSize} />))}
                     {level.vertices.map((v, i) => (<VertexView
                         key={i}
                         vertex={v}
                         vertexId={i}
                         vertexState={level.vertexState[i]}
-                        tileSize={50}
-                        edgeSize={10} />))}
+                        tileSize={tileSize}
+                        edgeSize={edgeSize} />))}
                     {overlay}
                 </div>
             );
@@ -149,6 +157,9 @@ GameBoard.propTypes = {
     resetLevel: PropTypes.func.isRequired,
     newGame: PropTypes.func.isRequired,
     visitVertex: PropTypes.func.isRequired,
+    tileSize: PropTypes.number.isRequired,
+    edgeSize: PropTypes.number.isRequired,
+    boardSize: PropTypes.number.isRequired
 };
 
 export default connect(

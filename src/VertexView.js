@@ -45,10 +45,8 @@ class VertexView extends Component {
 VertexView.propTypes = {
     vertex: PropTypes.shape({
         vertexType: PropTypes.string.isRequired,
-        x1: PropTypes.number.isRequired,
-        y1: PropTypes.number.isRequired,
-        x2: PropTypes.number.isRequired,
-        y2: PropTypes.number.isRequired,
+        x: PropTypes.number.isRequired,
+        y: PropTypes.number.isRequired,
     }).isRequired,
     tileSize: PropTypes.number.isRequired,
     edgeSize: PropTypes.number.isRequired,
