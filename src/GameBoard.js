@@ -9,13 +9,18 @@ import VertexView from './VertexView';
 class GameBoard extends Component {
     constructor() {
         super();
-        this.onClick = this.onClick.bind(this);
+        this.onMouseDown = this.onMouseDown.bind(this);
+        this.onMouseMove = this.onMouseMove.bind(this);
+        this.onMouseUp = this.onMouseUp.bind(this);
         this.state = {};
+        this.dragging = false;
     }
-    onClick(e) {
+    onMouseDown(e) {
+        this.dragging = true;
+    }
+    onMouseMove(e) {
+        if (!this.dragging) return;
         let {level, visitVertex} = this.props;
-        //console.log(e);
-        //console.log(e.nativeEvent);
         let x = (e.nativeEvent.clientX - this.div.offsetLeft);
         let y = (e.nativeEvent.clientY - this.div.offsetTop);
 
@@ -29,10 +34,25 @@ class GameBoard extends Component {
             let vertexId = row * (level.cols + 1) + col;
             visitVertex(vertexId);
         }
-
     }
+    onMouseUp(e) {
+        if (!this.dragging) return;
+        this.dragging = false;
+        let {level, visitVertex} = this.props;
+        let x = (e.nativeEvent.clientX - this.div.offsetLeft);
+        let y = (e.nativeEvent.clientY - this.div.offsetTop);
 
+        // find nearest vertex
 
+        let col = Math.round(x / 60) - 1;
+        let row = Math.round(y / 60) - 1;
+        console.log(x + ", " + y + " => " + col + ", " + row);
+
+        if (col >= 0 && row >= 0 && row <= level.rows && col <= level.cols) {
+            let vertexId = row * (level.cols + 1) + col;
+            visitVertex(vertexId);
+        }
+    }
     render() {
         let {level} = this.props;
         if (!level || !level.tiles || !level.tiles[0]) {
@@ -47,20 +67,25 @@ class GameBoard extends Component {
             if (level.completed && !level.won) {
                 overlay = (
                     <div className="boardOverlay">
-            Failed
+
                     </div>
                 );
             }
             else if (level.completed && level.won) {
                 overlay = (
                     <div className="boardOverlay">
-            You win
+
                     </div>
                 );
             }
             return (
-                <div className={"board " + (level.completed ? " completed" : "") + (level.won ? " won" : "") } ref={e => (this.div = e)} onClick={this.onClick}>
-
+                <div
+                    className={"board " + (level.completed ? " completed" : "") + (level.won ? " won" : "") }
+                    ref={e => (this.div = e)}
+                    onMouseDown={this.onMouseDown}
+                    onMouseMove={this.onMouseMove}
+                    onMouseUp={this.onMouseUp}
+                >
                     {level.tiles.map((t, i) => (<TileView
                         key={i}
                         tile={t}

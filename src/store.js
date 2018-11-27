@@ -124,7 +124,9 @@ function randomPath(path, vertices, edges, tiles) {
         let solution = {
             path: path,
             length: path.length,
-            regions: calculateRegions(tiles, edges, visitedEdges)
+            regions: calculateRegions(tiles, edges, visitedEdges),
+            edges: visitedEdges
+
         };
         if (solution.regions.length < 4) return null;
         return solution;
@@ -283,7 +285,7 @@ function generateLevel(rows, cols) {
     // add random broken edges
     for (let i = 0; i < breaks; i++) {
         let edgeId = Math.floor(Math.random() * level.edges.length);
-        if (solution.path.indexOf(edgeId) >= 0) continue;
+        if (solution.edges.indexOf(edgeId) >= 0) continue;
         console.log("breaking edge " + edgeId);
         level.edges[edgeId].broken = true;
     }
@@ -396,8 +398,16 @@ const level = (state = initialState.level, action) => {
             }));
             vertexState[vertexId].visited = true;
         }
+        // restart level by visiting entry point when not on a neighbouring vertex
+        else if (vertex.vertexType === "entry" && !edge) {
+            path = [vertexId];
+            vertexState = state.vertices.map(e => ({
+                visited: false
+            }));
+            vertexState[vertexId].visited = true;
+        }
         // backtrack
-        else if (vertexId === lastVertexId || vertexId === backtrackVertexId) {
+        else if (vertexId === backtrackVertexId) {
             vertexState[path.pop()] = {
                 visited: false
             };
