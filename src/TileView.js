@@ -4,8 +4,13 @@ import PropTypes from 'prop-types';
 class TileView extends Component {
     render() {
         let {tile, tileState, tileSize, edgeSize} = this.props;
+        let classes = ["tile", tile.tileType, tileState.valid ? " valid" : " invalid"];
+        if (tile.symbol) {
+            classes.push("symbol")
+            classes.push("symbol-"+tile.symbol);
+        }
         return (
-            <div className={'tile ' + (tile.tileType || "") + (tileState.valid ? " valid" : " invalid")} style={{
+            <div className={classes.join(" ")} style={{
                 width: tileSize,
                 height: tileSize,
                 left: (tile.x1 * (tileSize + edgeSize)),

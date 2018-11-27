@@ -9,7 +9,10 @@ const tileTypes = {
         place: (regions, tiles) => {
             console.log("placing sameColor tiles");
             // at least two colors, up to the number of regions
-            let availableColors = ["black", "white", "red", "blue", "green"];
+            let availableColors = ["black", "white", "orange", "blue", "green", "purple", "yellow"]
+                .map((a) => [Math.random(), a])
+                .sort((a, b) => a[0] - b[0])
+                .map((a) => a[1]);
             let colorCount = Math.min(availableColors.length, Math.floor(Math.random() * (regions.length - 2) + 2));
 
             console.log("placing sameColor tiles - " + colorCount);
@@ -28,6 +31,7 @@ const tileTypes = {
                     if (tile.tileType !== "blank") continue;
                     tile.tileType = "sameColor";
                     tile.color = availableColors[i];
+                    tile.symbol = "drop"
                 }
 
             }
@@ -314,7 +318,9 @@ function generateLevel(rows, cols) {
 
     level.vertexState[entries[0]].visited = true;
     level.path = [entries[0]];
-
+    level.solution = solution;
+    level.entries = entries;
+    level.exits = exits;
 
     return level;
 }
@@ -342,8 +348,8 @@ const level = (state = initialState.level, action) => {
                 visited: false
             })),
 
-            vertexState: state.vertices.map(e => ({
-                visited: false
+            vertexState: state.vertices.map((e,i) => ({
+                visited: i === state.entries[0]
             })),
 
             tileState: state.tiles.map(e => ({
@@ -352,7 +358,7 @@ const level = (state = initialState.level, action) => {
 
             regions: [state.tiles.map((e, i) => (i))],
 
-            path: [],
+            path: [state.entries[0]],
 
             completed: false,
 
