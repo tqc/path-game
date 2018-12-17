@@ -24,6 +24,94 @@ body {
   color: #61dafb;
 }
 
+
+.modalpage {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: black;
+  background-color: #338c00;
+  background-image: url("https://www.transparenttextures.com/patterns/scribble-light.png");
+}
+
+.modalpage.visible {
+  opacity: 1;
+  display: block;
+  animation: modal-show 1s;
+}
+.modalpage.hidden {
+  opacity: 0;
+  visibility: hidden;
+  animation: modal-hide 1s;
+}
+
+@keyframes modal-show {
+    0% { opacity: 0; visibility: hidden;}
+    1% { opacity: 0; visibility: visible; }
+    100% { opacity: 1; visibility: visible; }
+}
+
+@keyframes modal-hide {
+    0% { opacity: 1; visibility: visible; }
+    99% { opacity: 0; visibility: visible; }
+    100% { opacity: 0; visibility: hidden; }
+}
+
+.contentbox {
+    background-color: #ffffff88;
+    min-height: 700px;
+    margin: 20px;
+    border-radius: 10px;
+    padding: 10px;
+    position: relative;
+}
+
+.rulesrow {
+  margin: 2px auto;
+  max-width: 600px;
+  padding: 15px 0;
+  display: flex;
+  border-top: 1px solid #0000006b;
+  }
+
+.rulesrow.selected {
+  border: 2px solid #00f;
+}
+
+.rulesrow .tile {
+  background-color: #5f5f5f85;
+  color: #caff89;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  margin: 0px 10px;
+}
+
+.donebutton {
+      position: absolute;
+    bottom: 30px;
+    background: #32da3f;
+    font-size: 12pt;
+    padding: 10px 30px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    margin: auto;
+    width: 150px;
+    margin-left: -75px;
+}
+
+.menu {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 50px;
+}
+
 .boardcontainer {
   position: absolute;
   top: 0;
@@ -134,6 +222,9 @@ body {
     background-color: currentColor;
   }
 
+.tile.symbol-lock::after {
+  mask-image: url(/icons/iconmonstr-lock-3.svg);
+}
 .tile.symbol-tree::after {
   mask-image: url(/icons/iconmonstr-tree-1.svg);
 }
