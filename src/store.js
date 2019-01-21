@@ -23,7 +23,7 @@ let initialProgress = {
 };
 
 export const initialState = {
-    progress: initialProgress,
+    // progress: initialProgress,
     level: {
         ...generateLevel(6, 6, initialProgress),
     },
@@ -31,10 +31,24 @@ export const initialState = {
     rulesShown: false
 };
 
+function persistProgress(progress) {
+    localStorage.setItem("progress", JSON.stringify(progress));
+}
+
 export const reducer = (state = initialState, action) => {
     console.log(action.type);
 
     switch (action.type) {
+    case 'RECEIVE_PROGRESS': {
+        let progress = action.progress || initialProgress;
+        return {
+            ...state,
+            progress,
+            level: {
+                ...generateLevel(6, 6, progress),
+            }
+        };
+    }
     case 'SHOW_LEVEL_SELECT': {
         return {
             ...state,
@@ -249,6 +263,7 @@ export const reducer = (state = initialState, action) => {
                     progress.maxDifficulty++;
                     progress.currentDifficulty++;
                     progress.tileTypes = [...progress.tileTypes, generateTileType(progress)];
+                    persistProgress(progress);
                 }
             }
         }

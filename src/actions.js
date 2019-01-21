@@ -1,3 +1,24 @@
+
+export const requestProgress = text => ({
+    type: 'REQUEST_PROGRESS',
+    text
+});
+
+export const receiveProgress = progress => ({
+    type: 'RECEIVE_PROGRESS',
+    progress
+});
+
+export function loadProgress() {
+    return function(dispatch) {
+        let progressString = localStorage.getItem('progress');
+        let progress = progressString ? JSON.parse(progressString) : null;
+
+        dispatch(receiveProgress(progress));
+    }
+}
+
+
 export const newGame = text => ({
     type: 'NEW_GAME',
     text

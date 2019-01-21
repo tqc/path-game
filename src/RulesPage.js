@@ -6,15 +6,15 @@ import PropTypes from 'prop-types';
 
 class TileDescription extends Component {
     static propTypes = {
-        progress: PropTypes.shape({
+        tileSpec: PropTypes.shape({
         }),
         updateTileDescription: PropTypes.func.isRequired
     }
     render() {
         let {tileSpec, updateTileDescription} = this.props;
         return (
-            <div class="rulesrow">
-                <div class={"tile symbol symbol-" + tileSpec.symbol} ></div>
+            <div className="rulesrow">
+                <div className={"tile symbol symbol-" + tileSpec.symbol} ></div>
             {tileSpec.description}
             </div>
         )
