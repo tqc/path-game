@@ -13,11 +13,11 @@ class TileDescription extends Component {
     render() {
         let {tileSpec, setCurrentDifficulty, difficulty, selected} = this.props;
         return (
-            <div class={"rulesrow" + (selected ? " selected": "")} onClick={() => setCurrentDifficulty(difficulty)}>
-            <div class={"tile symbol symbol-" + tileSpec.symbol} ></div>
+            <div className={"rulesrow" + (selected ? " selected" : "")} onClick={() => setCurrentDifficulty(difficulty)}>
+                <div className={"tile symbol symbol-" + tileSpec.symbol} ></div>
             Level {difficulty}
             </div>
-        )
+        );
     }
 }
 
@@ -47,7 +47,7 @@ class LevelSelect extends Component {
             <div className={"modalpage " + (visible ? "visible" : "hidden")}>
                 <div className="contentbox">
                     <h1>Select a level</h1>
-                    {progress.tileTypes.map((tileSpec, i) => (<TileDescription key={i} selected={progress.currentDifficulty===i+1} difficulty={i+1} tileSpec={tileSpec} setCurrentDifficulty={setCurrentDifficulty} />))}
+                    {progress.tileTypes.map((tileSpec, i) => (<TileDescription key={i} selected={progress.currentDifficulty === i + 1} difficulty={i + 1} tileSpec={tileSpec} setCurrentDifficulty={setCurrentDifficulty} />))}
                     <UnlockRow progress={progress} />
                 </div>
             </div>

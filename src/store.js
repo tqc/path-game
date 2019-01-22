@@ -49,6 +49,25 @@ export const reducer = (state = initialState, action) => {
             }
         };
     }
+    case 'UPDATE_TILE_DESCRIPTION': {
+        console.log(action);
+        let progress = {
+            ...state.progress,
+            tileTypes: [...state.progress.tileTypes]
+        };
+
+        progress.tileTypes[action.id] = {
+            ...progress.tileTypes[action.id],
+            description: action.description,
+        };
+
+        persistProgress(progress);
+
+        return {
+            ...state,
+            progress
+        };
+    }
     case 'SHOW_LEVEL_SELECT': {
         return {
             ...state,
@@ -99,7 +118,7 @@ export const reducer = (state = initialState, action) => {
                 ...state.level,
                 ...generateLevel(6, 6, state.progress),
             }
-        }
+        };
     case 'RESET_LEVEL':
         return {
             ...state,
@@ -109,7 +128,7 @@ export const reducer = (state = initialState, action) => {
                     visited: false
                 })),
 
-                vertexState: state.level.vertices.map((e,i) => ({
+                vertexState: state.level.vertices.map((e, i) => ({
                     visited: i === state.level.entries[0]
                 })),
 

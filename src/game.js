@@ -94,7 +94,7 @@ export const tileTypes = {
                     if (tile.tileType !== "blank") continue;
                     tile.tileType = "sameColor";
                     tile.color = availableColors[i];
-                    tile.symbol = tileSpec.symbol
+                    tile.symbol = tileSpec.symbol;
                 }
 
             }
@@ -396,8 +396,8 @@ export function generateLevel(rows, cols, progress) {
 }
 
 export function generateTileType(progress) {
-    let usedSymbols = progress.tileTypes.map(t=>t.symbol);
-    let availableSymbols = allSymbols.filter(s=>usedSymbols.indexOf(s) < 0);
+    let usedSymbols = progress.tileTypes.map(t => t.symbol);
+    let availableSymbols = allSymbols.filter(s => usedSymbols.indexOf(s) < 0);
     let symbol = availableSymbols[Math.floor(Math.random() * availableSymbols.length)];
 
     let availableTypes = Object.keys(tileTypes).filter(t => !!tileTypes[t].generateSubtype);

@@ -6,8 +6,8 @@ class TileView extends Component {
         let {tile, tileState, tileSize, edgeSize} = this.props;
         let classes = ["tile", tile.tileType, tileState.valid ? " valid" : " invalid"];
         if (tile.symbol) {
-            classes.push("symbol")
-            classes.push("symbol-"+tile.symbol);
+            classes.push("symbol");
+            classes.push("symbol-" + tile.symbol);
         }
         return (
             <div className={classes.join(" ")} style={{

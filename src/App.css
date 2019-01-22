@@ -89,6 +89,12 @@ body {
   margin: 0px 10px;
 }
 
+.rulesrow textarea {
+    width: 100%;
+    border: none;
+    background: transparent;
+}
+
 .donebutton {
       position: absolute;
     bottom: 30px;

@@ -53,15 +53,15 @@ class GameContainer extends Component {
         let r = this.div.getBoundingClientRect();
         console.log(r);
         let boardSize = Math.min(r.width, r.height) - 20;
-        let edgeSize = boardSize / 60
-        let tileSize = (boardSize / (this.props.level.cols+2))-edgeSize;
+        let edgeSize = boardSize / 60;
+        let tileSize = (boardSize / (this.props.level.cols + 2)) - edgeSize;
         this.setState({
             boardSize: boardSize,
             vMargin: (r.height - boardSize) / 2,
             hMargin: (r.width - boardSize) / 2,
             tileSize: tileSize,
             edgeSize: edgeSize
-        })
+        });
     }
     componentDidMount() {
         this.updateSize();

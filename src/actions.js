@@ -15,7 +15,7 @@ export function loadProgress() {
         let progress = progressString ? JSON.parse(progressString) : null;
 
         dispatch(receiveProgress(progress));
-    }
+    };
 }
 
 
@@ -58,4 +58,10 @@ export const hideRules = id => ({
 export const setCurrentDifficulty = val => ({
     type: 'SET_CURRENT_DIFFICULTY',
     val
+});
+
+export const updateTileDescription = (id, description) => ({
+    type: 'UPDATE_TILE_DESCRIPTION',
+    id,
+    description
 });
