@@ -51,8 +51,7 @@ class GameContainer extends Component {
     updateSize() {
         if (!this.div) return;
         let r = this.div.getBoundingClientRect();
-        console.log(r);
-        let boardSize = Math.min(r.width, r.height) - 20;
+        let boardSize = Math.min(Math.min(r.width, r.height) - 20, 600);
         let edgeSize = boardSize / 60;
         let tileSize = (boardSize / (this.props.level.cols + 2)) - edgeSize;
         this.setState({

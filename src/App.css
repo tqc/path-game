@@ -1,7 +1,5 @@
 body {
-  background-color: black;
-  background-color: #338c00;
-  background-image: url("https://www.transparenttextures.com/patterns/scribble-light.png");
+  background-color: #123c4c;
 }
 
 
@@ -31,9 +29,7 @@ body {
   bottom: 0;
   right: 0;
   left: 0;
-  background-color: black;
-  background-color: #338c00;
-  background-image: url("https://www.transparenttextures.com/patterns/scribble-light.png");
+  background-color: #123c4c;
 }
 
 .modalpage.visible {
@@ -60,7 +56,7 @@ body {
 }
 
 .contentbox {
-    background-color: #ffffff88;
+    background-color: #ffffffcf;
     min-height: 700px;
     margin: 20px;
     border-radius: 10px;
@@ -82,7 +78,9 @@ body {
 
 .rulesrow .tile {
   background-color: #5f5f5f85;
-  color: #caff89;
+  background-image: url('/sandstone.jpg');
+  background-size: cover;
+  color: #0c3069;
   position: relative;
   width: 50px;
   height: 50px;
@@ -90,7 +88,7 @@ body {
 }
 
 .rulesrow textarea {
-    width: 100%;
+    width: 90%;
     border: none;
     background: transparent;
 }
@@ -112,16 +110,27 @@ body {
 
 .menu {
     position: absolute;
-    bottom: 0;
+    top: 50px;
     right: 0;
     left: 0;
-    height: 50px;
+}
+
+.menu button {
+    background-image: url(/sandstone.jpg);
+    background-size: cover;
+    margin: 10px;
+    padding: 5px;
+    font-size: 10pt;
+    font-weight: bold;
+    color: #415573;
+    border: 4px outset #a6a8ab45;
+    border-radius: 5px;
 }
 
 .boardcontainer {
   position: absolute;
   top: 0;
-  bottom: 0px;
+  bottom: 100px;
   left: 0;
   right: 0;
   margin: 0px;
@@ -182,6 +191,9 @@ body {
   position: relative;
   margin: 20px auto;
   color: white;
+  background-image: url('/sandstone.jpg');
+  background-size: cover;
+  border-radius: 5px;
 }
 
 .board::before {
@@ -191,9 +203,10 @@ body {
   top: 0px;
   right: 0px;
   bottom: 0px;
-  background-color: #6179bd;
-  border: 10px outset #8c98bb;
+  background-color: #898e9c;
+  border: 5px outset #7c7e84;
   opacity: 0.5;
+  border-radius: 5px;
 }
 
 .board::after {
@@ -203,10 +216,10 @@ body {
     top: 0px;
     right: 0px;
     bottom: 0px;
-    background-color: #6179bd;
-    border: 10px outset #8c98bb;
-    opacity: 0.1;
-    background: linear-gradient(135deg, rgba(212,228,239, 1) 0%,rgba(134,174,204,1) 100%);
+    background-color: transparent;
+    border: 5px outset #8c98bb;
+    opacity: 0.3;
+    border-radius: 5px;
   }
 
 .tile {
@@ -284,7 +297,7 @@ body {
 
 .vertex {
   position: absolute;
-  background-color: #8fb1ac;
+  background-color: #b1ae9c;
   font-size: 8pt;
   color: white;
 }
@@ -305,7 +318,7 @@ body {
 
 .edge {
   position: absolute;
-  background-color: #8fb1ac;
+  background-color: #b1ae9c;
   font-size: 8pt;
 }
 
@@ -318,4 +331,22 @@ body {
   display: none;
 }
 
+.creditfooter {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: #a5a7ad;
+  font-size: 10pt;
+  font-weight: bold;
+}
 
+.creditfooter > div {
+  max-width: 600px;
+  margin: 5px auto;
+  text-align: center;
+}
+
+.creditfooter a {
+  color: inherit;
+}

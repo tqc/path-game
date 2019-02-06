@@ -21,7 +21,6 @@ class App extends Component {
         return (
             <div className="App" style={{
             }}>
-                <h1>Path Game</h1>
                 <GameContainer />
                 <GameMenu />
                 <RulesPage />
