@@ -8,33 +8,33 @@ import RulesPage from './RulesPage';
 import LevelSelect from './LevelSelect';
 
 class App extends Component {
-    componentDidMount() {
-        let {progress, loadProgress} = this.props;
-        if (!progress) {
-            loadProgress();
-        }
+  componentDidMount() {
+    let {progress, loadProgress} = this.props;
+    if (!progress) {
+      loadProgress();
     }
-    render() {
-        let {progress} = this.props;
+  }
+  render() {
+    let {progress} = this.props;
 
-        if (!progress) return null;
-        return (
-            <div className="App" style={{
-            }}>
-                <GameContainer />
-                <GameMenu />
-                <RulesPage />
-                <LevelSelect />
-            </div>
-        );
-    }
+    if (!progress) return null;
+    return (
+      <div className="App" style={{
+      }}>
+        <GameContainer />
+        <GameMenu />
+        <RulesPage />
+        <LevelSelect />
+      </div>
+    );
+  }
 }
 
 export default connect(
-    state => ({
-        progress: state.progress,
-    }),
-    dispatch => ({
-        loadProgress: id => dispatch(Actions.loadProgress(id))
-    })
+  state => ({
+    progress: state.progress,
+  }),
+  dispatch => ({
+    loadProgress: id => dispatch(Actions.loadProgress(id))
+  })
 )(App);
