@@ -18,6 +18,7 @@
     "deploy": "react-scripts build && gh-pages -d build",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
+    "lint": "eslint .",
     "lint:fix": "eslint --fix ."
   },
   "browserslist": [
@@ -35,9 +36,20 @@
     "@storybook/preset-create-react-app": "^3.1.6",
     "@storybook/react": "^6.1.20",
     "@testing-library/react": "^11.2.5",
+    "@typescript-eslint/eslint-plugin": "^4.0.0",
+    "@typescript-eslint/parser": "^4.0.0",
+    "babel-eslint": "^10.0.0",
+    "eslint": "^7.5.0",
+    "eslint-config-react-app": "^6.0.0",
     "eslint-config-tqc": "^1.0.11",
+    "eslint-plugin-flowtype": "^5.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.3",
+    "eslint-plugin-react-hooks": "^4.0.8",
     "fs-extra": "^9.1.0",
     "gh-pages": "^3.1.0",
-    "storybook": "^6.1.20"
+    "storybook": "^6.1.20",
+    "typescript": "^4.2.2"
   }
 }
