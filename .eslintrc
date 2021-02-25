@@ -1,6 +1,8 @@
 {
     "extends": "tqc/react",
     "rules": {
-        "eqeqeq": "warn"
+        "eqeqeq": "warn",
+        "react/prop-types": 1,
+        "no-unused-vars": 1,
     }
 }

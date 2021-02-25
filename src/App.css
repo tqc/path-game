@@ -78,7 +78,7 @@ body {
 
 .rulesrow .tile {
   background-color: #5f5f5f85;
-  background-image: url('/sandstone.jpg');
+  background-image: url('./assets/sandstone.jpg');
   background-size: cover;
   color: #0c3069;
   position: relative;
@@ -116,7 +116,7 @@ body {
 }
 
 .menu button {
-    background-image: url(/sandstone.jpg);
+    background-image: url('./assets/sandstone.jpg');
     background-size: cover;
     margin: 10px;
     padding: 5px;
@@ -191,7 +191,7 @@ body {
   position: relative;
   margin: 20px auto;
   color: white;
-  background-image: url('/sandstone.jpg');
+  background-image: url('./assets/sandstone.jpg');
   background-size: cover;
   border-radius: 5px;
 }
@@ -242,35 +242,35 @@ body {
   }
 
 .tile.symbol-lock::after {
-  mask-image: url(/icons/iconmonstr-lock-3.svg);
+  mask-image: url(./assets/icons/iconmonstr-lock-3.svg);
 }
 .tile.symbol-tree::after {
-  mask-image: url(/icons/iconmonstr-tree-1.svg);
+  mask-image: url(./assets/icons/iconmonstr-tree-1.svg);
 }
 .tile.symbol-drop::after {
-  mask-image: url(/icons/iconmonstr-drop-1.svg);
+  mask-image: url(./assets/icons/iconmonstr-drop-1.svg);
 }
 .tile.symbol-square::after {
-  mask-image: url(/icons/iconmonstr-shape-1.svg);
+  mask-image: url(./assets/icons/iconmonstr-shape-1.svg);
 }
 .tile.symbol-circle::after {
-  mask-image: url(/icons/iconmonstr-shape-19.svg);
+  mask-image: url(./assets/icons/iconmonstr-shape-19.svg);
 }
 .tile.symbol-diamond::after {
-  mask-image: url(/icons/iconmonstr-shape-21.svg);
+  mask-image: url(./assets/icons/iconmonstr-shape-21.svg);
 }
 .tile.symbol-octagon::after {
-  mask-image: url(/icons/iconmonstr-shape-25.svg);
+  mask-image: url(./assets/icons/iconmonstr-shape-25.svg);
 }
 .tile.symbol-blob::after {
-  mask-image: url(/icons/iconmonstr-shape-27.svg);
+  mask-image: url(./assets/icons/iconmonstr-shape-27.svg);
 }
 .tile.symbol-sun::after {
-  mask-image: url(/icons/iconmonstr-shape-29.svg);
+  mask-image: url(./assets/icons/iconmonstr-shape-29.svg);
 }
 
 .tile.symbol-react::after {
-  mask-image: url(/icons/react.svg);
+  mask-image: url(./assets/icons/react.svg);
 }
 
 .board.completed .tile.invalid::before {
