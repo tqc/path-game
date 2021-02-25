@@ -15,7 +15,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "react-scripts build && gh-pages -d build"
+    "deploy": "react-scripts build && gh-pages -d build",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public",
+    "lint:fix": "eslint --fix ."
   },
   "browserslist": [
     ">0.2%",
@@ -24,7 +27,14 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@storybook/addon-actions": "^6.1.20",
+    "@storybook/addon-essentials": "^6.1.20",
+    "@storybook/addon-links": "^6.1.20",
+    "@storybook/node-logger": "^6.1.20",
+    "@storybook/preset-create-react-app": "^3.1.6",
+    "@storybook/react": "^6.1.20",
     "eslint-config-tqc": "^1.0.11",
-    "gh-pages": "^3.1.0"
+    "gh-pages": "^3.1.0",
+    "storybook": "^6.1.20"
   }
 }

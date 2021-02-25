@@ -6,7 +6,7 @@ import TileView from './TileView';
 import EdgeView from './EdgeView';
 import VertexView from './VertexView';
 
-class GameBoard extends Component {
+export class GameBoard extends Component {
     constructor() {
         super();
         this.onMouseDown = this.onMouseDown.bind(this);
@@ -16,9 +16,11 @@ class GameBoard extends Component {
         this.dragging = false;
     }
     componentDidMount() {
-        this.div.addEventListener("touchstart", this.onMouseDown);
-        this.div.addEventListener("touchmove", this.onMouseMove, {passive: false});
-        this.div.addEventListener("touchend", this.onMouseUp);
+        if (this.div) {
+            this.div.addEventListener("touchstart", this.onMouseDown);
+            this.div.addEventListener("touchmove", this.onMouseMove, {passive: false});
+            this.div.addEventListener("touchend", this.onMouseUp);
+        }
     }
     onMouseDown(e) {
         this.dragging = true;
