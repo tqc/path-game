@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots GameBoard Basic 1`] = `
+<DocumentFragment>
+  <div
+    class="board"
+  >
+    No game loaded;
+  </div>
+</DocumentFragment>
+`;

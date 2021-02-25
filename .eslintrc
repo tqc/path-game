@@ -1,9 +1,4 @@
 {
-    "extends": "tqc/react",
-    "rules": {
-        "eqeqeq": "warn",
-        "react/prop-types": 1,
-        "no-unused-vars": 1,
-        "indent": [1, 2],
-    }
+  "extends": "react-app",
+  "rules": {}
 }
