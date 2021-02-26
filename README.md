@@ -1,4 +1,4 @@
-![Deploy](https://github.com/tqc/path-game/workflows/deploy.yml/badge.svg?branch=master)
+![Deploy](https://github.com/tqc/path-game/actions/workflows/deploy.yml/badge.svg?branch=master)
 
 # Path Game
 
